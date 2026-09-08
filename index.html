@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Badminton League</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --bg:#f4f7f6;--card:#ffffff;--ink:#16342d;--muted:#6f817b;--line:#e1ebe7;
+  --primary:#166b58;--primary2:#239d7d;--soft:#edf6f2;--gold:#f4c45e;
+  --danger:#b64d4d;--warning:#9a6a19;--shadow:0 14px 36px rgba(20,70,58,.09)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+linear-gradient(180deg,#f9fbfa 0%,var(--bg) 100%);color:var(--ink)}
+.wrap{max-width:1180px;margin:auto;padding:24px 16px 50px}
+.hero{background:linear-gradient(135deg,#176e59,#103f36);color:white;padding:30px;border-radius:26px;box-shadow:var(--shadow)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.hero h1{margin:0 0 7px;font-size:clamp(29px,5vw,46px)}.hero p{margin:0;color:#d7eee7}
+.live-pill{padding:9px 13px;border-radius:999px;background:#ffffff17;border:1px solid #ffffff25;font-size:13px;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.stat{background:#ffffff12;border:1px solid #ffffff20;border-radius:16px;padding:14px}
+.stat small{display:block;color:#d2e9e2;margin-bottom:3px}.stat strong{font-size:23px}
+.nav{display:flex;gap:8px;margin-top:20px;overflow:auto;padding-bottom:2px}
+.nav button{white-space:nowrap;border:none;background:#eaf2ef;color:var(--ink);padding:10px 15px;border-radius:999px;font-weight:750;cursor:pointer}
+.nav button.active{background:var(--primary);color:white}
+.panel{display:none}.panel.active{display:block}
+.card{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.head h2{margin:0;font-size:21px}.head small{color:var(--muted)}
+.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:790px}
+th,td{padding:14px 12px;text-align:center;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:#fbfcfc}
+.team{text-align:left;font-weight:780}.rank{display:inline-grid;place-items:center;width:35px;height:35px;border-radius:50%;background:#edf3f1;font-weight:850}
+tbody tr:nth-child(1) .rank{background:#ffe594}.pts{font-weight:900;color:var(--primary);font-size:18px}
+.results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:18px}
+.match-card{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff}
+.match-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+.match-meta{font-size:12px;color:var(--muted)}.match-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
+.side{text-align:center;font-weight:800}.big-score{font-size:31px;font-weight:950;color:var(--primary);letter-spacing:.04em}
+.games{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:12px}
+.game-chip{background:var(--soft);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:750}
+.winner{color:var(--primary)}
+.admin-grid{display:grid;grid-template-columns:1.7fr .7fr 1.7fr .7fr 1fr;gap:10px;padding:18px 20px}
+.admin-grid.meta{grid-template-columns:1fr 1fr}
+.admin-grid.teamadd{grid-template-columns:3fr 1fr}
+input,select,button{font:inherit}input,select{width:100%;border:1px solid #d4e0dc;border-radius:11px;padding:11px;background:white;color:var(--ink)}
+button.action{border:none;border-radius:11px;padding:11px 13px;background:var(--primary);color:white;font-weight:750;cursor:pointer}
+button.secondary{background:#edf4f1;color:var(--primary)}
+button.warning{background:#fff6df;color:var(--warning);border:1px solid #eddfb9}
+button.danger{background:#fff0f0;color:var(--danger);border:1px solid #efcece}
+.section-label{padding:17px 20px 6px;font-weight:850}
+.notice{margin:14px 20px;padding:12px 14px;border-radius:12px;background:#fff8e9;color:#725617;border:1px solid #eedfb7;font-size:13px}
+.manage-list{padding:0 20px 20px}
+.manage-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.match-manage{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.match-manage-main{font-weight:780}.sub{font-size:12px;color:var(--muted);margin-top:3px}
+.login{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px 20px}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#0007;display:grid;place-items:center;padding:16px;z-index:100}
+.modal-card{background:white;width:min(620px,100%);max-height:90vh;overflow:auto;border-radius:20px;padding:20px;box-shadow:0 25px 70px #0004}
+.modal-card h3{margin:0 0 15px}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.game-entry{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:8px;align-items:center;margin-top:9px}
+.game-entry strong{font-size:12px;color:var(--muted)}
+.status{padding:11px 20px;color:var(--muted);font-size:13px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.review-summary{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;padding:18px}
+.summary-box{border:1px solid var(--line);border-radius:17px;padding:16px;background:#fbfdfc}
+.summary-box h3{margin:0 0 10px}.leader-name{font-size:25px;font-weight:900;color:var(--primary)}
+@media(max-width:800px){
+  .stats{grid-template-columns:1fr 1fr}.results-grid,.review-summary{grid-template-columns:1fr}
+  .admin-grid,.admin-grid.meta,.admin-grid.teamadd{grid-template-columns:1fr 1fr}
+  .admin-grid .action{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr}.manage-row,.match-manage{grid-template-columns:1fr 1fr}
+  .manage-row>span,.match-manage>div{grid-column:1/-1}
+  .game-entry{grid-template-columns:auto 1fr 1fr}.game-entry strong{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+  <div class="hero-top">
+    <div><h1>🏸 Family Badminton League</h1><p>Live standings, detailed match scores, one shared view.</p></div>
+    <div class="live-pill" id="liveBadge">● Connecting…</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><small>Teams / Players</small><strong id="teamCount">0</strong></div>
+    <div class="stat"><small>Matches Played</small><strong id="matchCount">0</strong></div>
+    <div class="stat"><small>Current Leader</small><strong id="leader">—</strong></div>
+    <div class="stat"><small>Games Played</small><strong id="gameCount">0</strong></div>
+  </div>
+</section>
+
+<nav class="nav">
+  <button class="active" data-tab="standings">Standings</button>
+  <button data-tab="results">Match Results</button>
+  <button data-tab="review">Tournament Review</button>
+  <button data-tab="admin">Organizer</button>
+</nav>
+
+<section id="standings" class="panel active">
+  <div class="card">
+    <div class="head"><div><h2>League Standings</h2><small>3 points for win · 1 for draw · 0 for loss</small></div></div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Rank</th><th style="text-align:left">Team / Player</th><th>P</th><th>W</th><th>D</th><th>L</th><th>SF</th><th>SA</th><th>+/-</th><th>Pts</th></tr></thead>
+        <tbody id="standingsBody"></tbody>
+      </table>
+    </div>
+    <div class="status" id="status">Loading shared standings…</div>
+  </div>
+</section>
+
+<section id="results" class="panel">
+  <div class="card">
+    <div class="head"><div><h2>Match Results</h2><small>Actual badminton game scores are shown for easy review.</small></div></div>
+    <div id="resultsGrid" class="results-grid"></div>
+  </div>
+</section>
+
+<section id="review" class="panel">
+  <div class="card">
+    <div class="head"><div><h2>Tournament Review</h2><small>A quick summary for family members and organizers.</small></div></div>
+    <div class="review-summary">
+      <div class="summary-box">
+        <h3>Current Leader</h3>
+        <div id="reviewLeader" class="leader-name">—</div>
+        <div id="reviewLeaderStats" class="sub">No matches yet.</div>
+      </div>
+      <div class="summary-box">
+        <h3>Latest Result</h3>
+        <div id="latestResult" style="font-weight:800">—</div>
+        <div id="latestGames" class="sub"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="admin" class="panel">
+  <div class="card">
+    <div class="head">
+      <div><h2>Organizer Controls</h2><small>Manage teams and detailed match results.</small></div>
+      <button id="adminToggle" class="action secondary" style="width:auto">Organizer Login</button>
+    </div>
+
+    <div id="loginBox" class="login hidden">
+      <input id="pin" type="password" placeholder="Organizer PIN">
+      <button id="loginBtn" class="action">Unlock</button>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="notice">Record the actual badminton game scores below. The website automatically converts them into a match result such as 2–0 or 2–1.</div>
+
+      <div class="section-label">Record New Match</div>
+      <div class="admin-grid meta">
+        <input id="roundName" placeholder="Round / Stage (optional)">
+        <input id="matchDate" type="date">
+      </div>
+      <div class="admin-grid" style="grid-template-columns:1fr 1fr">
+        <select id="teamA"></select>
+        <select id="teamB"></select>
+      </div>
+      <div style="padding:0 20px 6px;font-weight:800">Game Scores</div>
+      <div style="padding:0 20px 8px">
+        <div class="game-entry"><strong>Game 1</strong><input id="g1a" type="number" min="0" value="21"><span>–</span><input id="g1b" type="number" min="0" value="15"></div>
+        <div class="game-entry"><strong>Game 2</strong><input id="g2a" type="number" min="0" value="21"><span>–</span><input id="g2b" type="number" min="0" value="18"></div>
+        <div class="game-entry"><strong>Game 3</strong><input id="g3a" type="number" min="0" placeholder="Optional"><span>–</span><input id="g3b" type="number" min="0" placeholder="Optional"></div>
+      </div>
+      <div style="padding:0 20px 18px"><button id="saveMatch" class="action" style="width:100%">Save Match Result</button></div>
+
+      <div class="section-label">Add Team / Player</div>
+      <div class="admin-grid teamadd">
+        <input id="newTeam" placeholder="New team / player name">
+        <button id="addTeam" class="action">Add Team</button>
+      </div>
+
+      <div class="section-label">Manage Teams</div>
+      <div id="teamManager" class="manage-list"></div>
+
+      <div class="section-label">Manage Match Results</div>
+      <div id="matchManager" class="manage-list"></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div id="editTeamModal" class="modal hidden">
+  <div class="modal-card">
+    <h3>Rename Team / Player</h3>
+    <input id="editTeamName" style="width:100%">
+    <div class="modal-actions">
+      <button class="action secondary" onclick="closeModal('editTeamModal')">Cancel</button>
+      <button class="action" onclick="saveTeamEdit()">Save Name</button>
+    </div>
+  </div>
+</div>
+
+<div id="editMatchModal" class="modal hidden">
+  <div class="modal-card">
+    <h3>Edit Match Result</h3>
+    <div class="admin-grid meta" style="padding:0 0 10px">
+      <input id="editRound" placeholder="Round / Stage">
+      <input id="editDate" type="date">
+    </div>
+    <div class="admin-grid" style="grid-template-columns:1fr 1fr;padding:0 0 10px">
+      <select id="editTeamA"></select><select id="editTeamB"></select>
+    </div>
+    <div class="game-entry"><strong>Game 1</strong><input id="eg1a" type="number" min="0"><span>–</span><input id="eg1b" type="number" min="0"></div>
+    <div class="game-entry"><strong>Game 2</strong><input id="eg2a" type="number" min="0"><span>–</span><input id="eg2b" type="number" min="0"></div>
+    <div class="game-entry"><strong>Game 3</strong><input id="eg3a" type="number" min="0" placeholder="Optional"><span>–</span><input id="eg3b" type="number" min="0" placeholder="Optional"></div>
+    <div class="modal-actions">
+      <button class="action secondary" onclick="closeModal('editMatchModal')">Cancel</button>
+      <button class="action" onclick="saveMatchEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = "PASTE_YOUR_SUPABASE_URL_HERE";
+const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+const ORGANIZER_PIN = "2026";
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let teams=[], matches=[], admin=false, editingTeamId=null, editingMatchId=null;
+
+document.querySelectorAll('.nav button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  };
+});
+
+function esc(s){const d=document.createElement('div');d.textContent=s??'';return d.innerHTML}
+function getTeamName(id){return teams.find(t=>t.id===id)?.name||'Unknown Team'}
+function fmtDate(v){
+  if(!v)return 'Date not set';
+  const d=new Date(v+'T00:00:00');
+  return d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+}
+function gamesOf(m){return Array.isArray(m.game_scores)?m.game_scores:[]}
+function gameText(m){const g=gamesOf(m);return g.length?g.map(x=>`${x.a}–${x.b}`).join(' · '):'Detailed game scores not recorded'}
+function winnerName(m){
+  if(m.score_a>m.score_b)return getTeamName(m.team_a);
+  if(m.score_b>m.score_a)return getTeamName(m.team_b);
+  return 'Draw';
+}
+function calcMatch(games){
+  let a=0,b=0;
+  games.forEach(g=>{if(g.a>g.b)a++;else if(g.b>g.a)b++});
+  return {a,b};
+}
+function collectGames(prefix=''){
+  const ids = prefix ? ['eg1','eg2','eg3'] : ['g1','g2','g3'];
+  const games=[];
+  ids.forEach(id=>{
+    const av=document.getElementById(id+'a').value;
+    const bv=document.getElementById(id+'b').value;
+    if(av!=='' && bv!=='') games.push({a:Number(av),b:Number(bv)});
+  });
+  return games;
+}
+function validBadmintonGames(games){
+  if(games.length<2)return 'Enter at least two game scores.';
+  for(const g of games){
+    if(g.a===g.b)return 'A badminton game cannot finish as a tie.';
+    if(g.a<0||g.b<0)return 'Scores cannot be negative.';
+  }
+  const r=calcMatch(games);
+  if(r.a<2 && r.b<2)return 'The match must have a winner with 2 game wins.';
+  if(r.a===2 && r.b===2)return 'Too many games entered.';
+  if(games.length===3 && (r.a===3||r.b===3))return 'Best-of-3 matches end when a side wins 2 games.';
+  return null;
+}
+function standings(){
+  const r={};
+  teams.forEach(t=>r[t.id]={...t,p:0,w:0,d:0,l:0,sf:0,sa:0,diff:0,pts:0});
+  matches.forEach(m=>{
+    if(!r[m.team_a]||!r[m.team_b])return;
+    const a=r[m.team_a],b=r[m.team_b];
+    a.p++;b.p++;a.sf+=m.score_a;a.sa+=m.score_b;b.sf+=m.score_b;b.sa+=m.score_a;
+    if(m.score_a>m.score_b){a.w++;b.l++;a.pts+=3}
+    else if(m.score_b>m.score_a){b.w++;a.l++;b.pts+=3}
+    else{a.d++;b.d++;a.pts++;b.pts++}
+  });
+  Object.values(r).forEach(x=>x.diff=x.sf-x.sa);
+  return Object.values(r).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.sf-a.sf||a.name.localeCompare(b.name));
+}
+function teamOptions(selected=''){
+  return '<option value="">Select team / player</option>'+teams.map(t=>`<option value="${t.id}" ${t.id===selected?'selected':''}>${esc(t.name)}</option>`).join('');
+}
+function render(){
+  const s=standings();
+  const tbody=document.getElementById('standingsBody');
+  tbody.innerHTML=s.length?s.map((x,i)=>`
+    <tr><td><span class="rank">${i+1}</span></td><td class="team">${esc(x.name)}</td>
+    <td>${x.p}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td><td>${x.sf}</td><td>${x.sa}</td>
+    <td>${x.diff>0?'+':''}${x.diff}</td><td class="pts">${x.pts}</td></tr>`).join('')
+    :'<tr><td colspan="10" class="empty">No teams yet.</td></tr>';
+
+  document.getElementById('teamCount').textContent=teams.length;
+  document.getElementById('matchCount').textContent=matches.length;
+  document.getElementById('leader').textContent=s[0]?.name||'—';
+  document.getElementById('gameCount').textContent=matches.length;
+
+  const a=document.getElementById('teamA').value,b=document.getElementById('teamB').value;
+  document.getElementById('teamA').innerHTML=teamOptions(a);
+  document.getElementById('teamB').innerHTML=teamOptions(b);
+
+  renderResults();renderReview();renderTeamManager();renderMatchManager();
+}
+function renderResults(){
+  const box=document.getElementById('resultsGrid');
+  const ordered=matches.slice().sort((a,b)=>new Date(b.match_date||b.created_at)-new Date(a.match_date||a.created_at));
+  if(!ordered.length){box.innerHTML='<div class="empty" style="grid-column:1/-1">No match results yet.</div>';return}
+  box.innerHTML=ordered.map(m=>{
+    const aWin=m.score_a>m.score_b,bWin=m.score_b>m.score_a;
+    return `<article class="match-card">
+      <div class="match-top">
+        <span class="match-meta">${esc(m.round_name||'League Match')}</span>
+        <span class="match-meta">${fmtDate(m.match_date||m.created_at.slice(0,10))}</span>
+      </div>
+      <div class="match-score">
+        <div class="side ${aWin?'winner':''}">${esc(getTeamName(m.team_a))}</div>
+        <div class="big-score">${m.score_a}–${m.score_b}</div>
+        <div class="side ${bWin?'winner':''}">${esc(getTeamName(m.team_b))}</div>
+      </div>
+      <div class="games">${gamesOf(m).map((g,i)=>`<span class="game-chip">G${i+1}: ${g.a}–${g.b}</span>`).join('')||'<span class="game-chip">No detailed game scores</span>'}</div>
+    </article>`;
+  }).join('');
+}
+function renderReview(){
+  const s=standings();
+  document.getElementById('reviewLeader').textContent=s[0]?.name||'—';
+  document.getElementById('reviewLeaderStats').textContent=s[0]?`${s[0].w} wins from ${s[0].p} matches · ${s[0].pts} points`:'No matches yet.';
+  const latest=matches.slice().sort((a,b)=>new Date(b.match_date||b.created_at)-new Date(a.match_date||a.created_at))[0];
+  document.getElementById('latestResult').textContent=latest?`${getTeamName(latest.team_a)} ${latest.score_a}–${latest.score_b} ${getTeamName(latest.team_b)}`:'—';
+  document.getElementById('latestGames').textContent=latest?gameText(latest):'';
+}
+function renderTeamManager(){
+  const box=document.getElementById('teamManager');
+  box.innerHTML=teams.length?teams.map(t=>`
+    <div class="manage-row"><span><strong>${esc(t.name)}</strong></span>
+    <button class="action warning" onclick="openTeamEdit('${t.id}')">Edit</button>
+    <button class="action danger" onclick="deleteTeam('${t.id}')">Delete</button></div>`).join('')
+    :'<div class="status">No teams added yet.</div>';
+}
+function renderMatchManager(){
+  const box=document.getElementById('matchManager');
+  const ordered=matches.slice().reverse();
+  box.innerHTML=ordered.length?ordered.map(m=>`
+    <div class="match-manage">
+      <div><div class="match-manage-main">${esc(getTeamName(m.team_a))} ${m.score_a}–${m.score_b} ${esc(getTeamName(m.team_b))}</div>
+      <div class="sub">${gameText(m)}${m.round_name?' · '+esc(m.round_name):''}</div></div>
+      <button class="action warning" onclick="openMatchEdit('${m.id}')">Edit</button>
+      <button class="action danger" onclick="deleteMatch('${m.id}')">Delete</button>
+    </div>`).join('')
+    :'<div class="status">No match results yet.</div>';
+}
+async function load(){
+  const [{data:t,error:te},{data:m,error:me}]=await Promise.all([
+    db.from('teams').select('*').order('created_at'),
+    db.from('matches').select('*').order('created_at')
+  ]);
+  if(te||me){document.getElementById('status').textContent='Database setup required. Check Supabase URL, key and SQL setup.';return}
+  teams=t||[];matches=m||[];render();
+  document.getElementById('status').textContent='Shared standings are up to date.';
+  document.getElementById('liveBadge').textContent='● Live';
+}
+async function refresh(){await load()}
+db.channel('league-live')
+  .on('postgres_changes',{event:'*',schema:'public',table:'teams'},refresh)
+  .on('postgres_changes',{event:'*',schema:'public',table:'matches'},refresh)
+  .subscribe();
+
+document.getElementById('adminToggle').onclick=()=>document.getElementById('loginBox').classList.toggle('hidden');
+document.getElementById('loginBtn').onclick=()=>{
+  if(document.getElementById('pin').value===ORGANIZER_PIN){
+    admin=true;document.getElementById('loginBox').classList.add('hidden');document.getElementById('adminPanel').classList.remove('hidden');
+  }else alert('Incorrect organizer PIN.');
+};
+document.getElementById('addTeam').onclick=async()=>{
+  if(!admin)return;
+  const name=document.getElementById('newTeam').value.trim();
+  if(!name)return alert('Enter a team or player name.');
+  const {error}=await db.from('teams').insert({name});
+  if(error)alert(error.message);else document.getElementById('newTeam').value='';
+};
+document.getElementById('saveMatch').onclick=async()=>{
+  if(!admin)return;
+  const a=document.getElementById('teamA').value,b=document.getElementById('teamB').value;
+  if(!a||!b||a===b)return alert('Select two different teams.');
+  const games=collectGames('');
+  const msg=validBadmintonGames(games);if(msg)return alert(msg);
+  const r=calcMatch(games);
+  const payload={
+    team_a:a,team_b:b,score_a:r.a,score_b:r.b,game_scores:games,
+    round_name:document.getElementById('roundName').value.trim()||null,
+    match_date:document.getElementById('matchDate').value||null
+  };
+  const {error}=await db.from('matches').insert(payload);
+  if(error)alert(error.message);
+  else{
+    ['g1a','g1b','g2a','g2b','g3a','g3b'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('roundName').value='';
+  }
+};
+function openTeamEdit(id){
+  editingTeamId=id;const t=teams.find(x=>x.id===id);if(!t)return;
+  document.getElementById('editTeamName').value=t.name;
+  document.getElementById('editTeamModal').classList.remove('hidden');
+}
+async function saveTeamEdit(){
+  if(!admin||!editingTeamId)return;
+  const name=document.getElementById('editTeamName').value.trim();if(!name)return alert('Team name cannot be empty.');
+  const {error}=await db.from('teams').update({name}).eq('id',editingTeamId);
+  if(error)alert(error.message);else closeModal('editTeamModal');
+}
+async function deleteTeam(id){
+  if(!admin)return;const t=teams.find(x=>x.id===id);if(!t)return;
+  const related=matches.filter(m=>m.team_a===id||m.team_b===id).length;
+  if(!confirm(`Delete "${t.name}"?${related?` This also deletes ${related} related match(es).`:''}`))return;
+  const {error}=await db.from('teams').delete().eq('id',id);if(error)alert(error.message);
+}
+function openMatchEdit(id){
+  editingMatchId=id;const m=matches.find(x=>x.id===id);if(!m)return;
+  document.getElementById('editRound').value=m.round_name||'';
+  document.getElementById('editDate').value=m.match_date||'';
+  document.getElementById('editTeamA').innerHTML=teamOptions(m.team_a);
+  document.getElementById('editTeamB').innerHTML=teamOptions(m.team_b);
+  const g=gamesOf(m);
+  for(let i=0;i<3;i++){
+    document.getElementById(`eg${i+1}a`).value=g[i]?.a??'';
+    document.getElementById(`eg${i+1}b`).value=g[i]?.b??'';
+  }
+  document.getElementById('editMatchModal').classList.remove('hidden');
+}
+async function saveMatchEdit(){
+  if(!admin||!editingMatchId)return;
+  const a=document.getElementById('editTeamA').value,b=document.getElementById('editTeamB').value;
+  if(!a||!b||a===b)return alert('Select two different teams.');
+  const games=collectGames('e');
+  const msg=validBadmintonGames(games);if(msg)return alert(msg);
+  const r=calcMatch(games);
+  const {error}=await db.from('matches').update({
+    team_a:a,team_b:b,score_a:r.a,score_b:r.b,game_scores:games,
+    round_name:document.getElementById('editRound').value.trim()||null,
+    match_date:document.getElementById('editDate').value||null
+  }).eq('id',editingMatchId);
+  if(error)alert(error.message);else closeModal('editMatchModal');
+}
+async function deleteMatch(id){
+  if(!admin)return;const m=matches.find(x=>x.id===id);if(!m)return;
+  if(!confirm(`Delete ${getTeamName(m.team_a)} ${m.score_a}–${m.score_b} ${getTeamName(m.team_b)}?`))return;
+  const {error}=await db.from('matches').delete().eq('id',id);if(error)alert(error.message);
+}
+function closeModal(id){
+  document.getElementById(id).classList.add('hidden');
+  if(id==='editTeamModal')editingTeamId=null;
+  if(id==='editMatchModal')editingMatchId=null;
+}
+document.getElementById('matchDate').valueAsDate=new Date();
+load();
+</script>
+</body>
+</html>
