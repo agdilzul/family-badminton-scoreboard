@@ -73,3 +73,5 @@ table{min-width:650px}th,td{padding:9px 7px}th{font-size:9.5px;letter-spacing:.0
           git add index.html
           git commit -m "Redesign scoreboard with compact smart league layout"
           git push
+
+# trigger compact redesign
