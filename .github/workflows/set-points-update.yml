@@ -1,0 +1,39 @@
+name: Set-points standings update
+
+on:
+  push:
+    paths:
+      - '.github/workflows/set-points-update.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-scoring:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Change standings to set-points format
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          s = s.replace('3 points for win · 1 for draw · 0 for loss','1 point for every set won · Ranked by set points, then set difference')
+          s = s.replace('<th>Pts</th>','<th>Set Pts</th>')
+          old = "Object.values(r).forEach(x=>x.diff=x.sf-x.sa);return Object.values(r).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.sf-a.sf||a.name.localeCompare(b.name))"
+          new = "Object.values(r).forEach(x=>{x.diff=x.sf-x.sa;x.pts=x.sf});return Object.values(r).sort((a,b)=>b.pts-a.pts||b.diff-a.diff||b.w-a.w||a.name.localeCompare(b.name))"
+          if old not in s:
+              raise SystemExit('Expected standings calculation not found')
+          s = s.replace(old,new)
+          s = s.replace("${l.pts} points","${l.pts} set point${l.pts===1?'':'s'}")
+          s = s.replace('<span>Points</span>','<span>Set Points</span>')
+          p.write_text(s)
+          PY
+      - name: Commit updated scoring format
+        run: |
+          git config user.name "AGD Scoreboard Bot"
+          git config user.email "actions@github.com"
+          git add index.html
+          git commit -m "Rank league by sets won instead of match points"
+          git push
