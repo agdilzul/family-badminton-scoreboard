@@ -17,53 +17,20 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import base64
           p=Path('index.html')
           s=p.read_text()
-
-          # Simplify standings columns now that ranking is based on sets won.
           s=s.replace('1 point for every set won · Ranked by set points, then set difference','Ranked by sets won · set difference breaks ties')
           s=s.replace('<th>D</th>','')
           s=s.replace('<th>Set Pts</th>','')
           s=s.replace('<td>${x.d}</td>','')
           s=s.replace('<td class="pts">${x.pts}</td>','')
           s=s.replace('colspan="10"','colspan="8"')
-
-          # Make leader copy about sets won instead of points.
           s=s.replace("${l.pts} set point${l.pts===1?'':'s'}","${l.sf} set${l.sf===1?'':'s'} won")
           s=s.replace('<div class="lp"><b>${l.pts}</b><span>Set Points</span></div>','<div class="lp"><b>${l.sf}</b><span>Sets Won</span></div>')
-
-          marker='/* compact-smart-ui */'
-          if marker not in s:
-              css=r'''
-/* compact-smart-ui */
-body{background:#f7f8fa}
-.hero{box-shadow:0 1px 0 rgba(10,50,45,.08)}
-.hero-in{padding:14px 28px;min-height:78px}
-.logo{width:46px;height:46px;border-radius:12px;font-size:25px;box-shadow:0 5px 14px #0001}
-.brand{gap:12px}.brand h1{font-size:27px;letter-spacing:-.025em}.brand p{font-size:12px;margin-top:3px}.tagline{font-size:8px;letter-spacing:.22em;line-height:1.6}
-.page{max-width:1320px;padding:13px 28px 24px}
-.tabs{gap:6px;margin-bottom:12px}.tab{padding:8px 12px;border-radius:10px;font-size:12px;font-weight:800}.tab svg{width:16px;height:16px}
-.stats{gap:9px;margin-bottom:12px}.stat{min-height:84px;padding:11px 13px;border-radius:11px;gap:11px;box-shadow:0 3px 14px rgba(15,50,57,.055)}
-.sico{width:43px;height:43px}.sico svg{width:20px}.sl{font-size:11px}.sv{font-size:22px;margin-top:1px}.sn{font-size:10px;margin-top:3px}
-.dash{grid-template-columns:minmax(0,2.25fr) minmax(290px,.9fr);gap:11px}.card{border-radius:11px;box-shadow:0 3px 14px rgba(15,50,57,.055)}
-.chead{padding:11px 14px;gap:10px;min-height:58px}.ctitle{gap:9px}.ctitle svg{width:21px;height:21px}.ctitle h2{font-size:15px;letter-spacing:-.01em}.ctitle p{font-size:10.5px;margin-top:2px}.meta{font-size:10px}
-table{min-width:650px}th,td{padding:9px 7px}th{font-size:9.5px;letter-spacing:.04em}.rank{width:29px;height:29px;font-size:12px}.teamcell{gap:9px}.avatar{width:33px;height:33px;font-size:12px}.tname{font-size:12.5px}.tcode{font-size:8.5px}.pts{font-size:14px}.status{padding:7px 14px 9px;font-size:10px}
-.side{gap:10px}.latest{padding:9px}.box{padding:10px;border-radius:10px}.rowmeta{font-size:10px}.done{font-size:10px;margin:6px auto 9px;padding:4px 9px}.score{gap:7px}.scorename{font-size:12px}.bigscore{font-size:20px;padding:8px 10px}.sets{margin-top:8px}.set{padding:5px 7px;font-size:10px}
-.leader{padding:11px;gap:9px}.lav{width:48px;height:48px;font-size:15px;border-width:3px;box-shadow:0 0 0 4px #fff8df}.lname{font-size:13px}.lrec{font-size:9.5px}.lp{padding:8px 10px;border-radius:9px}.lp b{font-size:21px}.lp span{font-size:9px}
-.results{padding:11px;gap:9px}.result{padding:10px;border-radius:10px}.rscore{gap:8px;margin:9px 0}.rt{font-size:12px}.rb{font-size:19px;padding:7px 9px}.chip{font-size:9.5px;padding:5px 7px}
-.review{padding:11px;gap:9px}.rv{padding:13px;border-radius:10px}.rv h3{font-size:13px}.rvbig{font-size:20px}.rvnote{font-size:10.5px}
-.admin{padding:13px}.notice{padding:9px 11px;font-size:10.5px}.ft{font-size:12px;margin:13px 0 6px}input,select{min-height:38px;padding:8px 9px;font-size:12px}.act{padding:8px 11px;font-size:11px}.setsin{margin-top:5px}.mrow{padding:8px 0}
-.footer{max-width:1320px;padding:0 28px 20px}.fleft{font-size:13px}.fright{font-size:8.5px}.credit{font-size:9.5px}
-@media(max-width:740px){
-  .hero-in{padding:12px 14px}.logo{width:40px;height:40px;font-size:22px}.brand h1{font-size:20px}.brand p{font-size:10px}
-  .page{padding:10px 12px 18px}.tabs{margin-bottom:9px}.tab{padding:7px 9px;font-size:11px}
-  .stats{grid-template-columns:1fr 1fr;gap:7px}.stat{min-height:68px;padding:9px 10px}.stat:nth-child(3){grid-column:1/-1}.sico{width:36px;height:36px}.sico svg{width:17px}.sv{font-size:18px}.sn{font-size:9px}
-  .dash{grid-template-columns:1fr;gap:9px}.side{display:grid;grid-template-columns:1fr;gap:9px}.chead{padding:10px 12px}.ctitle h2{font-size:14px}.ctitle p{font-size:9.5px}
-  table{min-width:590px}th,td{padding:8px 6px}.teamcell{min-width:170px}.footer{padding:0 12px 18px}
-}
-'''
+          if '/* compact-smart-ui */' not in s:
+              css=base64.b64decode('LyogY29tcGFjdC1zbWFydC11aSAqLwpib2R5e2JhY2tncm91bmQ6I2Y3ZjhmYX0KLmhlcm97Ym94LXNoYWRvdzowIDFweCAwIHJnYmEoMTAsNTAsNDUsLjA4KX0KLmhlcm8taW57cGFkZGluZzoxNHB4IDI4cHg7bWluLWhlaWdodDo3OHB4fQoubG9nb3t3aWR0aDo0NnB4O2hlaWdodDo0NnB4O2JvcmRlci1yYWRpdXM6MTJweDtmb250LXNpemU6MjVweDtib3gtc2hhZG93OjAgNXB4IDE0cHggIzAwMDF9Ci5icmFuZHtnYXA6MTJweH0uYnJhbmQgaDF7Zm9udC1zaXplOjI3cHg7bGV0dGVyLXNwYWNpbmc6LS4wMjVlbX0uYnJhbmQgcHtmb250LXNpemU6MTJweDttYXJnaW4tdG9wOjNweH0udGFnbGluZXtmb250LXNpemU6OHB4O2xldHRlci1zcGFjaW5nOi4yMmVtO2xpbmUtaGVpZ2h0OjEuNn0KLnBhZ2V7bWF4LXdpZHRoOjEzMjBweDtwYWRkaW5nOjEzcHggMjhweCAyNHB4fQoudGFic3tnYXA6NnB4O21hcmdpbi1ib3R0b206MTJweH0udGFie3BhZGRpbmc6OHB4IDEycHg7Ym9yZGVyLXJhZGl1czoxMHB4O2ZvbnQtc2l6ZToxMnB4O2ZvbnQtd2VpZ2h0OjgwMH0udGFiIHN2Z3t3aWR0aDoxNnB4O2hlaWdodDoxNnB4fQouc3RhdHN7Z2FwOjlweDttYXJnaW4tYm90dG9tOjEycHh9LnN0YXR7bWluLWhlaWdodDo4NHB4O3BhZGRpbmc6MTFweCAxM3B4O2JvcmRlci1yYWRpdXM6MTFweDtnYXA6MTFweDtib3gtc2hhZG93OjAgM3B4IDE0cHggcmdiYSgxNSw1MCw1NywuMDU1KX0KLnNpY297d2lkdGg6NDNweDtoZWlnaHQ6NDNweH0uc2ljbyBzdmd7d2lkdGg6MjBweH0uc2x7Zm9udC1zaXplOjExcHh9LnN2e2ZvbnQtc2l6ZToyMnB4O21hcmdpbi10b3A6MXB4fS5zbntmb250LXNpemU6MTBweDttYXJnaW4tdG9wOjNweH0KLmRhc2h7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOm1pbm1heCgwLDIuMjVmcikgbWlubWF4KDI5MHB4LC45ZnIpO2dhcDoxMXB4fS5jYXJke2JvcmRlci1yYWRpdXM6MTFweDtib3gtc2hhZG93OjAgM3B4IDE0cHggcmdiYSgxNSw1MCw1NywuMDU1KX0KLmNoZWFke3BhZGRpbmc6MTFweCAxNHB4O2dhcDoxMHB4O21pbi1oZWlnaHQ6NThweH0uY3RpdGxle2dhcDo5cHh9LmN0aXRsZSBzdmd7d2lkdGg6MjFweDtoZWlnaHQ6MjFweH0uY3RpdGxlIGgye2ZvbnQtc2l6ZToxNXB4O2xldHRlci1zcGFjaW5nOi0uMDFlbX0uY3RpdGxlIHB7Zm9udC1zaXplOjEwLjVweDttYXJnaW4tdG9wOjJweH0ubWV0YXtmb250LXNpemU6MTBweH0KdGFibGV7bWluLXdpZHRoOjY1MHB4fXRoLHRke3BhZGRpbmc6OXB4IDdweH10aHtmb250LXNpemU6OS41cHg7bGV0dGVyLXNwYWNpbmc6LjA0ZW19LnJhbmt7d2lkdGg6MjlweDtoZWlnaHQ6MjlweDtmb250LXNpemU6MTJweH0udGVhbWNlbGx7Z2FwOjlweH0uYXZhdGFye3dpZHRoOjMzcHg7aGVpZ2h0OjMzcHg7Zm9udC1zaXplOjEycHh9LnRuYW1le2ZvbnQtc2l6ZToxMi41cHh9LnRjb2Rle2ZvbnQtc2l6ZTo4LjVweH0ucHRze2ZvbnQtc2l6ZToxNHB4fS5zdGF0dXN7cGFkZGluZzo3cHggMTRweCA5cHg7Zm9udC1zaXplOjEwcHh9Ci5zaWRle2dhcDoxMHB4fS5sYXRlc3R7cGFkZGluZzo5cHh9LmJveHtwYWRkaW5nOjEwcHg7Ym9yZGVyLXJhZGl1czoxMHB4fS5yb3dtZXRhe2ZvbnQtc2l6ZToxMHB4fS5kb25le2ZvbnQtc2l6ZToxMHB4O21hcmdpbjo2cHggYXV0byA5cHg7cGFkZGluZzo0cHggOXB4fS5zY29yZXtnYXA6N3B4fS5zY29yZW5hbWV7Zm9udC1zaXplOjEycHh9LmJpZ3Njb3Jle2ZvbnQtc2l6ZToyMHB4O3BhZGRpbmc6OHB4IDEwcHh9LnNldHN7bWFyZ2luLXRvcDo4cHh9LnNldHtwYWRkaW5nOjVweCA3cHg7Zm9udC1zaXplOjEwcHh9Ci5sZWFkZXJ7cGFkZGluZzoxMXB4O2dhcDo5cHh9Lmxhdnt3aWR0aDo0OHB4O2hlaWdodDo0OHB4O2ZvbnQtc2l6ZToxNXB4O2JvcmRlci13aWR0aDozcHg7Ym94LXNoYWRvdzowIDAgMCA0cHggI2ZmZjhkZn0ubG5hbWV7Zm9udC1zaXplOjEzcHh9LmxyZWN7Zm9udC1zaXplOjkuNXB4fS5scHtwYWRkaW5nOjhweCAxMHB4O2JvcmRlci1yYWRpdXM6OXB4fS5scCBie2ZvbnQtc2l6ZToyMXB4fS5scCBzcGFue2ZvbnQtc2l6ZTo5cHh9Ci5yZXN1bHRze3BhZGRpbmc6MTFweDtnYXA6OXB4fS5yZXN1bHR7cGFkZGluZzoxMHB4O2JvcmRlci1yYWRpdXM6MTBweH0ucnNjb3Jle2dhcDo4cHg7bWFyZ2luOjlweCAwfS5ydHtmb250LXNpemU6MTJweH0ucmJ7Zm9udC1zaXplOjE5cHg7cGFkZGluZzo3cHggOXB4fS5jaGlwe2ZvbnQtc2l6ZTo5LjVweDtwYWRkaW5nOjVweCA3cHh9Ci5yZXZpZXd7cGFkZGluZzoxMXB4O2dhcDo5cHh9LnJ2e3BhZGRpbmc6MTNweDtib3JkZXItcmFkaXVzOjEwcHh9LnJ2IGgze2ZvbnQtc2l6ZToxM3B4fS5ydmJpZ3tmb250LXNpemU6MjBweH0ucnZub3Rle2ZvbnQtc2l6ZToxMC41cHh9Ci5hZG1pbntwYWRkaW5nOjEzcHh9Lm5vdGljZXtwYWRkaW5nOjlweCAxMXB4O2ZvbnQtc2l6ZToxMC41cHh9LmZ0e2ZvbnQtc2l6ZToxMnB4O21hcmdpbjoxM3B4IDAgNnB4fWlucHV0LHNlbGVjdHttaW4taGVpZ2h0OjM4cHg7cGFkZGluZzo4cHggOXB4O2ZvbnQtc2l6ZToxMnB4fS5hY3R7cGFkZGluZzo4cHggMTFweDtmb250LXNpemU6MTFweH0uc2V0c2lue21hcmdpbi10b3A6NXB4fS5tcm93e3BhZGRpbmc6OHB4IDB9Ci5mb290ZXJ7bWF4LXdpZHRoOjEzMjBweDtwYWRkaW5nOjAgMjhweCAyMHB4fS5mbGVmdHtmb250LXNpemU6MTNweH0uZnJpZ2h0e2ZvbnQtc2l6ZTo4LjVweH0uY3JlZGl0e2ZvbnQtc2l6ZTo5LjVweH0KQG1lZGlhKG1heC13aWR0aDo3NDBweCl7CiAgLmhlcm8taW57cGFkZGluZzoxMnB4IDE0cHh9LmxvZ297d2lkdGg6NDBweDtoZWlnaHQ6NDBweDtmb250LXNpemU6MjJweH0uYnJhbmQgaDF7Zm9udC1zaXplOjIwcHh9LmJyYW5kIHB7Zm9udC1zaXplOjEwcHh9CiAgLnBhZ2V7cGFkZGluZzoxMHB4IDEycHggMThweH0udGFic3ttYXJnaW4tYm90dG9tOjlweH0udGFie3BhZGRpbmc6N3B4IDlweDtmb250LXNpemU6MTFweH0KICAuc3RhdHN7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjFmciAxZnI7Z2FwOjdweH0uc3RhdHttaW4taGVpZ2h0OjY4cHg7cGFkZGluZzo5cHggMTBweH0uc3RhdDpudGgtY2hpbGQoMyl7Z3JpZC1jb2x1bW46MS8tMX0uc2ljb3t3aWR0aDozNnB4O2hlaWdodDozNnB4fS5zaWNvIHN2Z3t3aWR0aDoxN3B4fS5zdntmb250LXNpemU6MThweH0uc257Zm9udC1zaXplOjlweH0KICAuZGFzaHtncmlkLXRlbXBsYXRlLWNvbHVtbnM6MWZyO2dhcDo5cHh9LnNpZGV7ZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnI7Z2FwOjlweH0uY2hlYWR7cGFkZGluZzoxMHB4IDEycHh9LmN0aXRsZSBoMntmb250LXNpemU6MTRweH0uY3RpdGxlIHB7Zm9udC1zaXplOjkuNXB4fQogIHRhYmxle21pbi13aWR0aDo1OTBweH10aCx0ZHtwYWRkaW5nOjhweCA2cHh9LnRlYW1jZWxse21pbi13aWR0aDoxNzBweH0uZm9vdGVye3BhZGRpbmc6MCAxMnB4IDE4cHh9Cn0K').decode()
               s=s.replace('</style></head>',css+'</style></head>')
-
           p.write_text(s)
           PY
       - name: Commit compact redesign
@@ -74,4 +41,4 @@ table{min-width:650px}th,td{padding:9px 7px}th{font-size:9.5px;letter-spacing:.0
           git commit -m "Redesign scoreboard with compact smart league layout"
           git push
 
-# trigger compact redesign
+# valid trigger
