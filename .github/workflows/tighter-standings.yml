@@ -1,0 +1,47 @@
+name: Tighter standings table
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tighter-standings.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-standings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tighten standings table
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+
+          old_head='<thead><tr><th>Rank</th><th>Team / Player</th><th>P</th><th>W</th><th>L</th><th>SF</th><th>SA</th><th>+/-</th></tr></thead>'
+          new_head='<thead><tr><th class="rankh">#</th><th>Team</th><th>W–L</th><th>Set Pts</th><th>Sets</th><th>Diff</th></tr></thead>'
+          if old_head not in s:
+              raise SystemExit('Expected standings header not found')
+          s=s.replace(old_head,new_head)
+
+          old_func='function renderStandings(s){$(\'standingsBody\').innerHTML=s.length?s.map((x,i)=>`<tr class="${i===0?\'lead\':\'\'}"><td><span class="rank">${i+1}</span></td><td><div class="teamcell"><div class="avatar">${ini(x.name)}</div><div><div class="tname">${esc(x.name)}</div><div class="tcode">${code(x.name)}</div></div></div></td><td>${x.p}</td><td>${x.w}</td><td>${x.l}</td><td>${x.sf}</td><td>${x.sa}</td><td>${x.diff>0?\'+\':\'\'}${x.diff}</td></tr>`).join(\'\'):\'<tr><td colspan="8" class="empty">No teams yet.</td></tr>\'}'
+          new_func='function renderStandings(s){$(\'standingsBody\').innerHTML=s.length?s.map((x,i)=>`<tr class="${i===0?\'lead\':\'\'}"><td><span class="rank">${i+1}</span></td><td><div class="teamcell"><div class="avatar">${ini(x.name)}</div><div><div class="tname">${esc(x.name)}</div><div class="tcode">${code(x.name)}</div></div></div></td><td><span class="record">${x.w}–${x.l}</span></td><td><span class="setpts">${x.pts}</span></td><td><span class="setsline">${x.sf}–${x.sa}</span></td><td><span class="diff ${x.diff>0?\'positive\':x.diff<0?\'negative\':\'\'}">${x.diff>0?\'+\':\'\'}${x.diff}</span></td></tr>`).join(\'\'):\'<tr><td colspan="6" class="empty">No teams yet.</td></tr>\'}'
+          if old_func not in s:
+              raise SystemExit('Expected renderStandings function not found')
+          s=s.replace(old_func,new_func)
+
+          css='''\n/* tighter-standings */\n#standings table{min-width:560px;table-layout:fixed}\n#standings th,#standings td{padding:8px 8px}\n#standings th:nth-child(1),#standings td:nth-child(1){width:54px}\n#standings th:nth-child(2),#standings td:nth-child(2){width:auto;text-align:left}\n#standings th:nth-child(3),#standings td:nth-child(3){width:74px}\n#standings th:nth-child(4),#standings td:nth-child(4){width:78px}\n#standings th:nth-child(5),#standings td:nth-child(5){width:72px}\n#standings th:nth-child(6),#standings td:nth-child(6){width:62px}\n#standings .rank{width:27px;height:27px;font-size:11px;background:#edf1f2;color:#29495c}\n#standings tr.lead .rank{background:#ffe084;color:#7d5904}\n#standings .teamcell{gap:8px}\n#standings .avatar{width:31px;height:31px;font-size:11px}\n#standings .tname{font-size:12.5px;font-weight:900;line-height:1.15}\n#standings .tcode{font-size:8px;margin-top:1px}\n#standings .record{font-weight:800;color:#29495c;letter-spacing:.02em}\n#standings .setpts{display:inline-grid;place-items:center;min-width:31px;height:27px;padding:0 7px;border-radius:8px;background:#e9f6f1;color:var(--g);font-weight:950;font-size:13px}\n#standings .setsline{color:#60798b;font-weight:750}\n#standings .diff{font-weight:800;color:#708698}\n#standings .diff.positive{color:#0b7a5b}\n#standings .diff.negative{color:#b65c5c}\n#standings tbody tr{height:46px}\n#standings tbody tr.lead{background:linear-gradient(90deg,#edf9f4 0%,#fbfefd 100%)}\n@media(max-width:740px){#standings table{min-width:520px}#standings th,#standings td{padding:7px 6px}#standings .tname{font-size:12px}}\n'''
+          if '/* tighter-standings */' not in s:
+              s=s.replace('</style></head>',css+'</style></head>')
+
+          p.write_text(s)
+          PY
+      - name: Commit tighter standings
+        run: |
+          git config user.name "AGD Scoreboard Bot"
+          git config user.email "actions@github.com"
+          git add index.html
+          git commit -m "Tighten standings table and emphasize set points"
+          git push
