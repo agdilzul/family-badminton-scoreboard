@@ -1,0 +1,33 @@
+name: Sets won standings label
+
+on:
+  push:
+    paths:
+      - '.github/workflows/sets-won-label.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-standings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make set points equal sets won explicitly
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('<th>Set Pts</th>','<th>Sets Won</th>')
+          s=s.replace('<span class="setpts">${x.pts}</span>','<span class="setpts">${x.sf}</span>')
+          s=s.replace('Ranked by sets won · set difference breaks ties','Ranked by total sets won · set difference breaks ties')
+          p.write_text(s)
+          PY
+      - name: Commit sets-won clarification
+        run: |
+          git config user.name "AGD Scoreboard Bot"
+          git config user.email "actions@github.com"
+          git add index.html
+          git commit -m "Show total sets won as standings points"
+          git push
