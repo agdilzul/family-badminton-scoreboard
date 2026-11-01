@@ -2024,6 +2024,395 @@ body::before{
     opacity:.72;
   }
 }
+
+/* mobile-optimization-final */
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .topbar{position:sticky;top:0}
+  .topbar-in{
+    padding:10px 12px 8px;
+    gap:8px;
+    align-items:center;
+  }
+  .topbrand{
+    min-width:0;
+    flex:1 1 auto;
+    gap:9px;
+  }
+  .topbrand-mark{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    font-size:12px;
+    flex:0 0 auto;
+  }
+  .topbrand strong{
+    font-size:11.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:185px;
+  }
+  .topbrand small{
+    margin-top:3px;
+    font-size:7.5px;
+    letter-spacing:.1em;
+  }
+  .theme-toggle{
+    width:36px;
+    height:36px;
+    min-height:36px;
+    padding:0;
+    border-radius:10px;
+    flex:0 0 36px;
+  }
+  .theme-toggle svg{width:15px;height:15px}
+  .topbar .tabs{
+    order:3;
+    flex:0 0 calc(100% + 24px);
+    width:calc(100% + 24px);
+    margin:2px -12px -8px;
+    padding:4px 12px 9px;
+    gap:6px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  .topbar .tabs::-webkit-scrollbar{display:none}
+  .topbar .tab{
+    flex:0 0 auto;
+    min-height:36px;
+    padding:8px 10px;
+    font-size:10.5px;
+    border-radius:9px;
+    scroll-snap-align:start;
+    white-space:nowrap;
+  }
+  .topbar .tab svg{width:14px;height:14px}
+
+  .page{
+    width:100%;
+    padding:15px 10px 26px;
+  }
+  .event-hero{
+    min-height:0;
+    padding:22px 18px;
+    margin-bottom:16px;
+    border-radius:16px;
+  }
+  .event-eyebrow{
+    font-size:8px;
+    letter-spacing:.12em;
+  }
+  .event-hero h1{
+    margin:7px 0 8px;
+    font-size:clamp(27px,8.6vw,34px);
+    line-height:1.03;
+    letter-spacing:-.045em;
+  }
+  .event-hero p{
+    max-width:82%;
+    font-size:11.5px;
+    line-height:1.5;
+  }
+  .event-badge{
+    min-width:64px;
+    padding:10px 9px;
+    border-radius:11px;
+  }
+  .event-badge span{font-size:6.5px}
+  .event-badge strong{font-size:24px}
+  .event-hero::before{
+    width:230px;
+    height:180px;
+    right:-65px;
+    top:-22px;
+  }
+  .event-hero::after{
+    width:165px;
+    height:165px;
+    right:-64px;
+    top:-12px;
+    box-shadow:
+      0 0 0 24px rgba(230,239,112,.04),
+      0 0 0 48px rgba(255,255,255,.018);
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:16px;
+  }
+  .stat{
+    min-height:92px;
+    padding:13px 12px;
+    gap:9px;
+    border-radius:13px;
+  }
+  .stat:nth-child(3){grid-column:1/-1}
+  .sico,.sico.gold{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+  }
+  .sico svg{width:17px;height:17px}
+  .sl{
+    font-size:8px;
+    line-height:1.25;
+    letter-spacing:.06em;
+  }
+  .sv,.stat:nth-child(3) .sv{
+    font-size:22px;
+    margin-top:3px;
+  }
+  .sn,.stat:nth-child(3) .sn{
+    font-size:9px;
+    line-height:1.35;
+    margin-top:3px;
+  }
+
+  .dash{display:block}
+  .card{
+    width:100%;
+    border-radius:14px;
+  }
+  .side{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:11px;
+    margin-top:11px;
+  }
+  .chead{
+    min-height:0;
+    padding:13px 13px;
+    align-items:flex-start;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .ctitle{
+    gap:9px;
+    min-width:0;
+    flex:1 1 100%;
+  }
+  .ctitle svg{
+    width:18px;
+    height:18px;
+    flex:0 0 auto;
+    margin-top:1px;
+  }
+  .ctitle h2{
+    font-size:15px;
+    line-height:1.2;
+  }
+  .ctitle p{
+    font-size:10px;
+    line-height:1.4;
+  }
+  .meta{
+    margin-left:27px;
+    font-size:9px;
+    line-height:1.3;
+  }
+
+  .rulesbox{margin:10px}
+  .rulesbox summary{
+    padding:9px 10px;
+    gap:7px;
+  }
+  .rulestitle{font-size:10.5px}
+  .ruleshint{display:none}
+  .rulesbody{padding:0 10px 10px}
+  .rulescores{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    padding-top:9px;
+  }
+  .rulescores div{
+    min-width:0;
+    padding:8px;
+    font-size:9.5px;
+  }
+  .rulescores b{font-size:9px}
+  .rulesbody p{
+    font-size:9.5px;
+    line-height:1.5;
+  }
+
+  /* Mobile standings: fit the full table without horizontal scrolling */
+  #standings .scroll{
+    overflow:visible;
+    width:100%;
+  }
+  #standings table{
+    min-width:0!important;
+    width:100%!important;
+    table-layout:fixed;
+  }
+  #standings th,
+  #standings td{
+    padding:9px 4px;
+  }
+  #standings th{font-size:7.5px}
+  #standings th:nth-child(1),#standings td:nth-child(1){width:34px}
+  #standings th:nth-child(2),#standings td:nth-child(2){width:auto}
+  #standings th:nth-child(3),#standings td:nth-child(3){width:28px}
+  #standings th:nth-child(4),#standings td:nth-child(4){width:45px}
+  #standings th:nth-child(5),#standings td:nth-child(5){width:50px}
+  #standings th:nth-child(6),#standings td:nth-child(6){width:32px}
+  #standings tbody tr{height:56px}
+  #standings .rank{
+    width:25px;
+    height:25px;
+    border-radius:7px;
+    font-size:9.5px;
+  }
+  #standings .teamcell{
+    min-width:0!important;
+    gap:7px;
+    align-items:center;
+  }
+  #standings .avatar{
+    width:29px;
+    height:29px;
+    border-radius:8px;
+    font-size:9px;
+    flex:0 0 29px;
+  }
+  #standings .teamcell>div:last-child{
+    min-width:0;
+  }
+  #standings .tname{
+    font-size:10.2px;
+    line-height:1.2;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  #standings .tcode{display:none}
+  #standings .played,
+  #standings .record,
+  #standings .diff{
+    font-size:9.5px;
+  }
+  #standings .setpts{
+    min-width:28px;
+    height:25px;
+    padding:0 4px;
+    font-size:10px;
+    border-radius:7px;
+  }
+  .status{
+    padding:9px 11px 11px;
+    font-size:8.5px;
+  }
+
+  .latest,.leader,.results,.review,.history,.admin{padding:12px}
+  .box,.result,.rv{padding:12px}
+  .score,.rscore{grid-template-columns:1fr}
+  .bigscore,.rb{margin:auto}
+  .leader{
+    grid-template-columns:auto 1fr;
+    gap:10px;
+  }
+  .lav{width:44px;height:44px}
+  .lp{
+    grid-column:1/-1;
+    margin-top:2px;
+  }
+  .review{grid-template-columns:1fr}
+  .rvwide{grid-column:auto}
+  .semigrid{grid-template-columns:1fr}
+  .semibox{
+    grid-template-columns:1fr;
+    gap:5px;
+  }
+  .semibox em{display:none}
+
+  /* Results and history remain readable without breaking the viewport */
+  .archivescroll,
+  .scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .archivetable{min-width:560px}
+  .archivegrid{grid-template-columns:1fr}
+  .archivehead{
+    padding:12px;
+    gap:8px;
+  }
+  .archivehead h3{font-size:15px}
+  .archivehead p{font-size:9.5px}
+
+  /* Organizer is one-column and touch friendly */
+  .form2,.login,.addrow{grid-template-columns:1fr}
+  input,select{
+    min-height:44px;
+    font-size:16px; /* prevents iOS form zoom */
+  }
+  .setsin{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  .setsin b{grid-column:1/-1}
+  .setsin span{display:none}
+  .ma{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .act{
+    min-height:42px;
+    width:100%;
+    justify-content:center;
+  }
+  .mrow{
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+  .mrow>div,.mrow>span{grid-column:auto}
+
+  .modal{padding:12px}
+  .modalbox{
+    width:100%;
+    max-height:90dvh;
+    overflow:auto;
+    padding:18px;
+    border-radius:15px;
+  }
+
+  .footer.azs-footer{
+    padding:18px 12px 22px;
+  }
+  .azs-powered{
+    min-height:40px;
+    padding:8px 13px;
+    font-size:10px;
+  }
+  .azs-contact-card.icon-only{
+    width:min(340px,calc(100vw - 24px));
+    padding:34px 14px 18px;
+  }
+  .azs-contact-card.icon-only .azs-social-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+  }
+  .azs-contact-card.icon-only .azs-social-link{
+    min-height:60px;
+    border-radius:12px;
+  }
+}
+
+@media(max-width:380px){
+  .topbrand strong{max-width:155px}
+  .event-hero{padding:20px 15px}
+  .event-hero h1{font-size:27px}
+  .event-hero p{max-width:88%;font-size:10.8px}
+  .event-badge{display:none}
+  .stats{gap:7px}
+  .stat{padding:11px 10px}
+  #standings th:nth-child(2),#standings td:nth-child(2){padding-left:2px;padding-right:2px}
+  #standings .avatar{width:27px;height:27px;flex-basis:27px}
+  #standings .tname{font-size:9.6px}
+  #standings th:nth-child(4),#standings td:nth-child(4){width:42px}
+  #standings th:nth-child(5),#standings td:nth-child(5){width:46px}
+}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
