@@ -1909,6 +1909,49 @@ input,select{min-height:42px;font-size:12.5px}
     opacity:.07;
   }
 }
+
+/* ambient-court-background */
+body{
+  position:relative;
+  isolation:isolate;
+}
+.topbar,.page,.footer{position:relative;z-index:1}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 16% 26%,rgba(53,106,71,.055),transparent 25rem),
+    radial-gradient(circle at 84% 72%,rgba(144,161,53,.035),transparent 23rem),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='760' viewBox='0 0 1200 760'%3E%3Cg fill='none' stroke='%235f7e69' stroke-opacity='.10' stroke-width='2'%3E%3Crect x='105' y='80' width='990' height='600' rx='12'/%3E%3Cline x1='600' y1='80' x2='600' y2='680'/%3E%3Cline x1='105' y1='380' x2='1095' y2='380'/%3E%3Cline x1='245' y1='80' x2='245' y2='680'/%3E%3Cline x1='955' y1='80' x2='955' y2='680'/%3E%3Cline x1='105' y1='205' x2='1095' y2='205'/%3E%3Cline x1='105' y1='555' x2='1095' y2='555'/%3E%3Cline x1='245' y1='205' x2='955' y2='205'/%3E%3Cline x1='245' y1='555' x2='955' y2='555'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat,no-repeat,no-repeat;
+  background-position:left 2% top 8%,right 4% bottom 8%,center 190px;
+  background-size:auto,auto,min(1120px,82vw) auto;
+  opacity:.9;
+}
+:root[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 50% -12%,rgba(39,85,61,.22),transparent 36rem),
+    linear-gradient(180deg,#07150f 0%,#081811 62%,#06120d 100%);
+}
+:root[data-theme="dark"] body::before{
+  background-image:
+    radial-gradient(circle at 18% 22%,rgba(117,217,168,.07),transparent 26rem),
+    radial-gradient(circle at 88% 72%,rgba(223,240,110,.045),transparent 24rem),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='760' viewBox='0 0 1200 760'%3E%3Cg fill='none' stroke='%2397b7a5' stroke-opacity='.11' stroke-width='2'%3E%3Crect x='105' y='80' width='990' height='600' rx='12'/%3E%3Cline x1='600' y1='80' x2='600' y2='680'/%3E%3Cline x1='105' y1='380' x2='1095' y2='380'/%3E%3Cline x1='245' y1='80' x2='245' y2='680'/%3E%3Cline x1='955' y1='80' x2='955' y2='680'/%3E%3Cline x1='105' y1='205' x2='1095' y2='205'/%3E%3Cline x1='105' y1='555' x2='1095' y2='555'/%3E%3Cline x1='245' y1='205' x2='955' y2='205'/%3E%3Cline x1='245' y1='555' x2='955' y2='555'/%3E%3C/g%3E%3C/svg%3E");
+  background-position:left 2% top 7%,right 4% bottom 9%,center 185px;
+  background-size:auto,auto,min(1180px,84vw) auto;
+  opacity:1;
+}
+@media(max-width:760px){
+  body::before{
+    background-position:left top,right bottom,center 150px;
+    background-size:auto,auto,980px auto;
+    opacity:.72;
+  }
+}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
