@@ -1382,6 +1382,242 @@ input,select{min-height:42px;font-size:12.5px}
   }
   .theme-toggle span{display:none}
 }
+
+/* hybrid-dark-surface-pass */
+:root[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 75% 0%,rgba(104,164,109,.08),transparent 28rem),
+    #07150f;
+}
+:root[data-theme="dark"] .topbar{
+  background:rgba(9,25,18,.97);
+}
+:root[data-theme="dark"] .event-hero{
+  background:
+    radial-gradient(circle at 83% 20%,rgba(228,244,108,.12),transparent 23rem),
+    linear-gradient(125deg,#0f2d22 0%,#0b2119 70%,#173a2b 100%);
+}
+
+/* warm off-white content surfaces */
+:root[data-theme="dark"] .stat,
+:root[data-theme="dark"] .stat:nth-child(3),
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .box,
+:root[data-theme="dark"] .result,
+:root[data-theme="dark"] .rv,
+:root[data-theme="dark"] .semibox,
+:root[data-theme="dark"] .archivecard{
+  background:#f6f3ea;
+  border-color:#d8ded7;
+  color:#1b3127;
+  box-shadow:0 10px 28px rgba(0,0,0,.16);
+}
+:root[data-theme="dark"] .sico,
+:root[data-theme="dark"] .sico.gold{
+  background:#e5ecd9;
+  color:#28583d;
+}
+:root[data-theme="dark"] .sl,
+:root[data-theme="dark"] .stat:nth-child(3) .sl{color:#738178}
+:root[data-theme="dark"] .sv,
+:root[data-theme="dark"] .stat:nth-child(3) .sv{color:#173326}
+:root[data-theme="dark"] .sn,
+:root[data-theme="dark"] .stat:nth-child(3) .sn{color:#829087}
+
+/* standings / major panels */
+:root[data-theme="dark"] .chead{
+  background:#f6f3ea;
+  border-bottom-color:#dde3dc;
+}
+:root[data-theme="dark"] .ctitle h2,
+:root[data-theme="dark"] .lname,
+:root[data-theme="dark"] .rv h3,
+:root[data-theme="dark"] .archivehead h3,
+:root[data-theme="dark"] .archivematch b{color:#173326}
+:root[data-theme="dark"] .ctitle p,
+:root[data-theme="dark"] .meta,
+:root[data-theme="dark"] .lrec,
+:root[data-theme="dark"] .rvnote,
+:root[data-theme="dark"] .archivehead p{color:#718078}
+:root[data-theme="dark"] .ctitle svg{color:#2f7953}
+
+:root[data-theme="dark"] .rulesbox{
+  background:#edf1e7;
+  border-color:#d7ded4;
+}
+:root[data-theme="dark"] .rulesbox summary,
+:root[data-theme="dark"] .rulestitle{color:#284a3a}
+:root[data-theme="dark"] .rulesicon{
+  background:#173d2d;
+  color:#e6ef69;
+}
+:root[data-theme="dark"] .ruleshint,
+:root[data-theme="dark"] .rulesbody p{color:#6f7e75}
+:root[data-theme="dark"] .rulesbody{border-top-color:#d8dfd5}
+:root[data-theme="dark"] .rulescores div{
+  background:#fffdf7;
+  border-color:#dbe2da;
+}
+:root[data-theme="dark"] .rulescores b{color:#40594d}
+:root[data-theme="dark"] .rulescores span{color:#236b49}
+
+/* standings table */
+:root[data-theme="dark"] #standings th{
+  background:#e8ede5;
+  color:#566b60;
+  border-bottom-color:#d4ddd5;
+}
+:root[data-theme="dark"] #standings td{
+  background:#f8f5ee;
+  color:#263f34;
+  border-bottom-color:#dde3dd;
+}
+:root[data-theme="dark"] #standings tbody tr:hover td{background:#f0f3eb}
+:root[data-theme="dark"] #standings tbody tr.lead td{
+  background:linear-gradient(90deg,#eef3d9 0%,#f8f5ee 100%);
+}
+:root[data-theme="dark"] #standings .rank{
+  background:#e0e6df;
+  color:#496156;
+}
+:root[data-theme="dark"] #standings tr.lead .rank{
+  background:#173d2d;
+  color:#e6ef69;
+}
+:root[data-theme="dark"] #standings .avatar,
+:root[data-theme="dark"] .avatar,
+:root[data-theme="dark"] .lav{
+  background:#1c7655;
+  color:#fff;
+}
+:root[data-theme="dark"] #standings .tname{color:#173326}
+:root[data-theme="dark"] #standings .tcode{color:#8b9991}
+:root[data-theme="dark"] #standings .played,
+:root[data-theme="dark"] #standings .record{color:#3d594c}
+:root[data-theme="dark"] #standings .setpts{
+  background:#e3efe8;
+  color:#1e6d4c;
+}
+:root[data-theme="dark"] #standings .diff{color:#667a70}
+:root[data-theme="dark"] #standings .diff.positive{color:#24704d}
+:root[data-theme="dark"] #standings .diff.negative{color:#b65b58}
+:root[data-theme="dark"] .status{
+  background:#f6f3ea;
+  color:#7b8981;
+}
+
+/* right-side cards */
+:root[data-theme="dark"] .done{
+  background:#e5efe8;
+  color:#2a7050;
+}
+:root[data-theme="dark"] .bigscore,
+:root[data-theme="dark"] .rb{
+  background:#173d2d;
+  color:#e6ef69;
+}
+:root[data-theme="dark"] .set,
+:root[data-theme="dark"] .chip{
+  background:#e9ede7;
+  color:#62756a;
+}
+:root[data-theme="dark"] .lp{
+  background:#e8efd7;
+  color:#274738;
+  border-color:#d6dfc1;
+}
+:root[data-theme="dark"] .rvbig{color:#246d4e}
+:root[data-theme="dark"] .semibox{background:#f0f2eb}
+:root[data-theme="dark"] .semibox>span{color:#2d7151}
+:root[data-theme="dark"] .semibox b{color:#29483a}
+:root[data-theme="dark"] .semibox em{color:#8a958f}
+
+/* review / history / admin surfaces */
+:root[data-theme="dark"] .results,
+:root[data-theme="dark"] .review,
+:root[data-theme="dark"] .history{background:#f6f3ea}
+:root[data-theme="dark"] .archivehead{
+  background:#f6f3ea;
+  border-bottom-color:#dce2da;
+}
+:root[data-theme="dark"] .archivebadge{
+  background:#173d2d;
+  color:#e6ef69;
+}
+:root[data-theme="dark"] .archiveleader{
+  background:#ecefe8;
+  color:#6e7d74;
+}
+:root[data-theme="dark"] .archiveleader b{color:#173326}
+:root[data-theme="dark"] .archivematches{border-top-color:#dce2da}
+:root[data-theme="dark"] .archivematches summary{color:#365447}
+:root[data-theme="dark"] .archivematch{
+  background:#fffdf7;
+  border-color:#dbe2da;
+}
+
+:root[data-theme="dark"] .notice{
+  background:#eaf0dd;
+  border-color:#d3ddc5;
+  color:#55632d;
+}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select{
+  background:#fffdf8;
+  border-color:#cfd8d1;
+  color:#223b30;
+}
+:root[data-theme="dark"] input::placeholder{color:#8d9a92}
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus{
+  outline:3px solid rgba(73,143,102,.14);
+  border-color:#71a984;
+}
+:root[data-theme="dark"] .act{
+  background:#173d2d;
+  color:#fff;
+}
+:root[data-theme="dark"] .act:hover{background:#20533d}
+:root[data-theme="dark"] .act.sec{
+  background:#e6ece7;
+  color:#29463a;
+}
+:root[data-theme="dark"] .act.warn{
+  background:#f2ead3;
+  color:#80631f;
+  border-color:#d9c89c;
+}
+:root[data-theme="dark"] .act.danger{
+  background:#f1dddd;
+  color:#9a4747;
+  border-color:#dfbcbc;
+}
+
+/* keep overlays dark, popup itself light */
+:root[data-theme="dark"] .modal{background:rgba(2,10,6,.76)}
+:root[data-theme="dark"] .modalbox,
+:root[data-theme="dark"] .contact-card{
+  background:#f8f5ee;
+  border-color:#d5ddd6;
+  color:#1d352a;
+}
+:root[data-theme="dark"] .contact-close{
+  background:#e9eeea;
+  color:#425c50;
+}
+:root[data-theme="dark"] .azs-social-link{
+  background:#fffdf8;
+  border-color:#d9e0da;
+  color:#294a3c;
+}
+:root[data-theme="dark"] .azs-social-link:hover{
+  background:#eef4ef;
+  border-color:#9fc8af;
+}
+:root[data-theme="dark"] .azs-social-link svg,
+:root[data-theme="dark"] .azs-social-link .brand-social-icon{color:#20704c}
+:root[data-theme="dark"] .azs-powered-title{color:#718078}
+:root[data-theme="dark"] .azs-powered-title strong{color:#173d2d}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
