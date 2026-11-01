@@ -1870,6 +1870,45 @@ input,select{min-height:42px;font-size:12.5px}
 :root[data-theme="dark"] .footer,
 :root[data-theme="dark"] .azs-powered{color:#92a69b}
 :root[data-theme="dark"] .azs-powered strong{color:#8de0b6}
+
+/* shuttle-silhouette-banner */
+.event-hero::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:330px;
+  height:330px;
+  right:235px;
+  top:-70px;
+  background:#dfe9d8;
+  opacity:.105;
+  transform:rotate(-17deg);
+  pointer-events:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 320'%3E%3Cg fill='none' stroke='black' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M37 36h166l-47 174c-6 24-21 38-36 38s-30-14-36-38L37 36Z'/%3E%3Cpath d='M65 38l37 192M101 38l15 206M139 38l-15 206M175 38l-37 192'/%3E%3Cpath d='M78 216h84'/%3E%3Cpath d='M89 247c0 21 14 37 31 37s31-16 31-37H89Z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 320'%3E%3Cg fill='none' stroke='black' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M37 36h166l-47 174c-6 24-21 38-36 38s-30-14-36-38L37 36Z'/%3E%3Cpath d='M65 38l37 192M101 38l15 206M139 38l-15 206M175 38l-37 192'/%3E%3Cpath d='M78 216h84'/%3E%3Cpath d='M89 247c0 21 14 37 31 37s31-16 31-37H89Z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+}
+:root[data-theme="dark"] .event-hero::before{
+  background:#d8e2dc;
+  opacity:.11;
+}
+@media(max-width:900px){
+  .event-hero::before{
+    width:275px;
+    height:275px;
+    right:145px;
+    top:-46px;
+    opacity:.085;
+  }
+}
+@media(max-width:600px){
+  .event-hero::before{
+    width:225px;
+    height:225px;
+    right:18px;
+    top:-34px;
+    opacity:.07;
+  }
+}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
