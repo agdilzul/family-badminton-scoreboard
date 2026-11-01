@@ -2473,6 +2473,226 @@ body::before{
 :root[data-theme="dark"] .azs-social-link:hover .brand-social-icon{
   color:#ffffff!important;
 }
+
+/* version-c-sporty-energetic */
+:root{
+  --sport-lime:#dff06e;
+  --sport-green:#0f6b4e;
+  --sport-deep:#0b251b;
+}
+
+/* overall tournament atmosphere */
+body{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(54,141,91,.08),transparent 26rem),
+    radial-gradient(circle at 12% 82%,rgba(181,205,70,.055),transparent 24rem),
+    linear-gradient(180deg,#f3f7f3 0%,#eef4ef 100%);
+}
+body::before{
+  background-image:
+    linear-gradient(128deg,transparent 0 75%,rgba(61,111,70,.035) 75% 78%,transparent 78% 82%,rgba(143,167,72,.028) 82% 85%,transparent 85%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='900' viewBox='0 0 1400 900'%3E%3Cg fill='none' stroke='%23577961' stroke-opacity='.11' stroke-width='2'%3E%3Crect x='160' y='100' width='1080' height='700' rx='16'/%3E%3Cline x1='700' y1='100' x2='700' y2='800'/%3E%3Cline x1='160' y1='450' x2='1240' y2='450'/%3E%3Cline x1='315' y1='100' x2='315' y2='800'/%3E%3Cline x1='1085' y1='100' x2='1085' y2='800'/%3E%3Cline x1='160' y1='250' x2='1240' y2='250'/%3E%3Cline x1='160' y1='650' x2='1240' y2='650'/%3E%3Cline x1='315' y1='250' x2='1085' y2='250'/%3E%3Cline x1='315' y1='650' x2='1085' y2='650'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat,no-repeat;
+  background-position:right -120px top 110px,center 190px;
+  background-size:620px 620px,min(1220px,88vw) auto;
+  opacity:.9;
+}
+
+/* top navigation */
+.topbrand-mark{
+  background:var(--sport-lime);
+  color:#173025;
+  box-shadow:0 8px 20px rgba(38,86,51,.10);
+}
+.topbar .tab.active{
+  background:#dfe9d6;
+  color:#173a29;
+  box-shadow:inset 0 0 0 1px #c9d9c4;
+}
+.topbar .tab.active svg{color:#477b43}
+
+/* hero: Version C diagonal sport language */
+.event-hero{
+  background:
+    linear-gradient(128deg,transparent 0 68%,rgba(223,240,110,.20) 68% 72%,transparent 72% 75%,rgba(223,240,110,.09) 75% 78%,transparent 78%),
+    linear-gradient(125deg,#163f2e 0%,#123526 67%,#174832 100%);
+  border-color:#2d6047;
+}
+.event-hero::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:auto -10px -38px 48%;
+  width:auto;
+  height:150px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='180' viewBox='0 0 700 180'%3E%3Cg fill='none' stroke='%23d8e5d9' stroke-opacity='.34' stroke-width='2'%3E%3Cpath d='M30 160L240 74L680 96'/%3E%3Cpath d='M90 180L270 99L650 119'/%3E%3Cpath d='M240 74L270 99'/%3E%3Cpath d='M374 88L397 106'/%3E%3Cpath d='M510 93L523 112'/%3E%3Cpath d='M250 78L250 154'/%3E%3Cpath d='M500 91L500 143'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  background-size:contain;
+  opacity:.72;
+  transform:none;
+  -webkit-mask:none;
+  mask:none;
+  pointer-events:none;
+}
+.event-hero::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:330px;
+  height:330px;
+  right:-150px;
+  top:-120px;
+  border:0;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(223,240,110,.10) 0%,rgba(223,240,110,.035) 48%,transparent 70%);
+  box-shadow:none;
+  pointer-events:none;
+}
+.event-copy,.event-badge{position:relative;z-index:2}
+.event-badge{
+  background:var(--sport-lime);
+  color:#153023;
+  box-shadow:0 12px 28px rgba(6,30,18,.16);
+}
+.event-eyebrow{color:#e6f482}
+
+/* cards */
+.stat,.card{
+  border-color:#d7e1d8;
+}
+.sico,.sico.gold{
+  background:#eaf1dd;
+  color:#3d7044;
+}
+.stat:nth-child(3) .sico{
+  color:#567735;
+}
+.card{
+  overflow:hidden;
+}
+.ctitle svg{color:#2b7a53}
+.rulesicon{
+  background:#173d2d;
+  color:var(--sport-lime);
+}
+#standings tr.lead .rank{
+  background:#173d2d;
+  color:var(--sport-lime);
+}
+#standings .setpts{
+  background:#e5f1e9;
+  color:#1c714e;
+}
+
+/* subtle sporty diagonal detailing on larger cards */
+#standings.card,
+.side .card{
+  position:relative;
+}
+#standings.card::after,
+.side .card::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  width:120px;
+  height:120px;
+  right:-58px;
+  bottom:-58px;
+  background:linear-gradient(135deg,transparent 35%,rgba(92,137,76,.04) 35% 48%,transparent 48% 60%,rgba(163,185,76,.03) 60% 70%,transparent 70%);
+}
+
+/* dark mode */
+:root[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(46,141,87,.13),transparent 28rem),
+    radial-gradient(circle at 10% 84%,rgba(190,213,72,.07),transparent 28rem),
+    linear-gradient(180deg,#06140e 0%,#071a12 58%,#05110c 100%);
+}
+:root[data-theme="dark"] body::before{
+  background-image:
+    linear-gradient(128deg,transparent 0 76%,rgba(125,181,88,.09) 76% 79%,transparent 79% 83%,rgba(209,229,92,.07) 83% 86%,transparent 86%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='900' viewBox='0 0 1400 900'%3E%3Cg fill='none' stroke='%23b4cbbd' stroke-opacity='.20' stroke-width='2'%3E%3Crect x='160' y='100' width='1080' height='700' rx='16'/%3E%3Cline x1='700' y1='100' x2='700' y2='800'/%3E%3Cline x1='160' y1='450' x2='1240' y2='450'/%3E%3Cline x1='315' y1='100' x2='315' y2='800'/%3E%3Cline x1='1085' y1='100' x2='1085' y2='800'/%3E%3Cline x1='160' y1='250' x2='1240' y2='250'/%3E%3Cline x1='160' y1='650' x2='1240' y2='650'/%3E%3Cline x1='315' y1='250' x2='1085' y2='250'/%3E%3Cline x1='315' y1='650' x2='1085' y2='650'/%3E%3C/g%3E%3C/svg%3E");
+  background-position:right -110px top 120px,center 195px;
+  background-size:650px 650px,min(1260px,90vw) auto;
+  opacity:.95;
+}
+:root[data-theme="dark"] .topbar .tab.active{
+  background:#26482f;
+  color:#f3f8c6;
+  box-shadow:inset 0 0 0 1px #3d6543;
+}
+:root[data-theme="dark"] .event-hero{
+  background:
+    linear-gradient(128deg,transparent 0 68%,rgba(223,240,110,.22) 68% 72%,transparent 72% 75%,rgba(101,164,79,.12) 75% 78%,transparent 78%),
+    linear-gradient(125deg,#103423 0%,#0c281c 67%,#17452d 100%);
+  border-color:#2e6546;
+}
+:root[data-theme="dark"] .event-hero::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='180' viewBox='0 0 700 180'%3E%3Cg fill='none' stroke='%23eef5ef' stroke-opacity='.42' stroke-width='2'%3E%3Cpath d='M30 160L240 74L680 96'/%3E%3Cpath d='M90 180L270 99L650 119'/%3E%3Cpath d='M240 74L270 99'/%3E%3Cpath d='M374 88L397 106'/%3E%3Cpath d='M510 93L523 112'/%3E%3Cpath d='M250 78L250 154'/%3E%3Cpath d='M500 91L500 143'/%3E%3C/g%3E%3C/svg%3E");
+  opacity:.8;
+}
+:root[data-theme="dark"] .event-badge{
+  background:#dff06e;
+  color:#13271c;
+}
+:root[data-theme="dark"] .stat,
+:root[data-theme="dark"] .card{
+  border-color:#315343;
+  box-shadow:0 14px 34px rgba(0,0,0,.20);
+}
+:root[data-theme="dark"] .sico,
+:root[data-theme="dark"] .sico.gold{
+  background:#1d3a2c;
+  color:#dff06e;
+}
+:root[data-theme="dark"] .ctitle svg{color:#78e0aa}
+:root[data-theme="dark"] .rulesicon{
+  background:#dff06e;
+  color:#173025;
+}
+:root[data-theme="dark"] #standings tr.lead .rank{
+  background:#dff06e;
+  color:#14281f;
+}
+:root[data-theme="dark"] #standings .setpts{
+  background:#25483a;
+  color:#dff06e;
+}
+:root[data-theme="dark"] #standings.card::after,
+:root[data-theme="dark"] .side .card::after{
+  background:linear-gradient(135deg,transparent 35%,rgba(104,173,94,.07) 35% 48%,transparent 48% 60%,rgba(223,240,110,.045) 60% 70%,transparent 70%);
+}
+
+/* mobile version C */
+@media(max-width:760px){
+  body::before,
+  :root[data-theme="dark"] body::before{
+    background-position:right -240px top 100px,center 135px;
+    background-size:470px 470px,980px auto;
+  }
+  .event-hero{
+    background:
+      linear-gradient(128deg,transparent 0 77%,rgba(223,240,110,.16) 77% 82%,transparent 82%),
+      linear-gradient(125deg,#163f2e 0%,#123526 72%,#174832 100%);
+  }
+  :root[data-theme="dark"] .event-hero{
+    background:
+      linear-gradient(128deg,transparent 0 77%,rgba(223,240,110,.18) 77% 82%,transparent 82%),
+      linear-gradient(125deg,#103423 0%,#0c281c 72%,#17452d 100%);
+  }
+  .event-hero::before{
+    inset:auto -28px -28px 42%;
+    height:120px;
+    opacity:.56;
+  }
+  .event-hero::after{
+    width:220px;
+    height:220px;
+    right:-120px;
+    top:-70px;
+  }
+}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
