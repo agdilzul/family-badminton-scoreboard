@@ -78,11 +78,219 @@ table{min-width:650px}th,td{padding:9px 7px}th{font-size:9.5px;letter-spacing:.0
 
 /* tournament-2-and-history */
 .rvwide{grid-column:1/-1}.semigrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.semibox{border:1px solid var(--line);border-radius:10px;background:#f8fbfa;padding:11px;display:grid;grid-template-columns:auto 1fr auto 1fr;align-items:center;gap:8px;font-size:11px}.semibox>span{font-weight:950;color:var(--g);font-size:9px;text-transform:uppercase;letter-spacing:.08em}.semibox b{color:#24485a}.semibox em{font-style:normal;color:#8799a5;font-size:9px;text-transform:uppercase}.history{padding:14px;display:grid;gap:12px}.archivecard{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.archivehead{padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid var(--line)}.archivehead h3{margin:5px 0 2px;font-size:16px}.archivehead p{margin:0;color:var(--mut);font-size:10.5px}.archivehead svg{color:#8a9aa5;width:20px}.archivebadge{display:inline-block;background:#eef3f4;color:#607887;border-radius:999px;padding:4px 7px;font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.archiveleader{padding:10px 14px;background:#f8fbfa;color:#617887;font-size:10.5px}.archiveleader b{color:#24485a;margin-left:5px}.archivescroll{overflow:auto}.archivetable{min-width:620px;box-shadow:none}.archivetable th,.archivetable td{padding:8px;font-size:10px}.archivetable th:nth-child(2),.archivetable td:nth-child(2){text-align:left}.archivematches{border-top:1px solid var(--line)}.archivematches summary{cursor:pointer;padding:11px 14px;font-size:10.5px;font-weight:850;color:#315568}.archivegrid{padding:0 14px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.archivematch{border:1px solid var(--line);border-radius:8px;padding:9px;display:grid;gap:3px}.archivematch span,.archivematch small{color:#7c909d;font-size:9px}.archivematch b{font-size:10.5px;color:#29495c}@media(max-width:740px){.semigrid,.archivegrid{grid-template-columns:1fr}.semibox{grid-template-columns:1fr}.semibox em{display:none}}
+
+/* modern-badminton-club */
+:root{
+  --g:#173c34;
+  --gd:#102f29;
+  --ink:#243d37;
+  --mut:#76847f;
+  --line:#e6dfcf;
+  --bg:#f6f2e7;
+  --gold:#b88b2d;
+  --gold-soft:#f3e7bd;
+  --paper:#fffdf8;
+  --red:#ad5652;
+  --shadow:0 3px 14px rgba(39,55,49,.045)
+}
+body{background:var(--bg);color:var(--ink)}
+.hero{
+  background:linear-gradient(112deg,#173c34 0%,#102f29 100%);
+  box-shadow:none;
+  border-bottom:1px solid rgba(224,198,126,.28)
+}
+.hero:after{display:none}
+.hero-in{max-width:1320px;padding:18px 28px;min-height:94px}
+.brand{gap:14px}
+.logo{
+  width:50px;height:50px;border-radius:13px;
+  background:#f9f5e9;color:#173c34;
+  box-shadow:none;border:1px solid rgba(255,255,255,.16);
+  font-size:26px
+}
+.edition{
+  margin-bottom:4px;color:#e3c87d;font-size:8.5px;font-weight:900;
+  letter-spacing:.16em;text-transform:uppercase
+}
+.brand h1{
+  font-size:29px;letter-spacing:-.035em;font-weight:900;color:#fffdf6
+}
+.brand p{font-size:11px;color:#cbd7d2;margin-top:4px}
+.tagline{
+  color:#d8dfda;font-style:normal;font-size:8px;letter-spacing:.18em;line-height:1.7
+}
+.tagline span{
+  display:block;color:#dfc579;font-size:8px;font-weight:900;
+  letter-spacing:.12em;margin-bottom:2px
+}
+.page{max-width:1320px;padding-top:14px}
+.tabs{
+  gap:4px;margin-bottom:12px;padding:4px;
+  border:1px solid #e1dacb;background:#efe9dc;border-radius:12px;
+  width:max-content;max-width:100%
+}
+.tab{
+  background:transparent;color:#667871;border-radius:8px;
+  padding:8px 12px;font-size:11px;font-weight:850
+}
+.tab:hover{background:#f8f4ea;color:#29473f}
+.tab.active{
+  background:var(--gold-soft);color:#173c34;
+  box-shadow:inset 0 0 0 1px #dec987
+}
+.tab svg{width:15px;height:15px}
+.stats{gap:9px;margin-bottom:12px}
+.stat{
+  background:var(--paper);border-color:var(--line);box-shadow:none;
+  border-radius:10px;min-height:80px;padding:11px 13px
+}
+.stat:nth-child(3){
+  background:#efe3b9;border-color:#dbc886
+}
+.sico{
+  border-radius:10px;background:#edf1e9;color:#173c34;
+  width:40px;height:40px
+}
+.sico.gold{background:#173c34;color:#e4c979}
+.sl{color:#7a8882;font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:850}
+.sv{color:#173c34;font-size:20px;letter-spacing:-.025em}
+.stat:nth-child(3) .sv{color:#173c34}
+.sn{color:#80908a;font-size:9.5px}
+.card{
+  background:var(--paper);border-color:var(--line);
+  border-radius:10px;box-shadow:none
+}
+.chead{
+  padding:11px 14px;border-bottom-color:var(--line);
+  background:rgba(255,253,248,.88)
+}
+.ctitle svg{color:#7e6726;width:19px;height:19px}
+.ctitle h2{color:#244039;font-size:14px}
+.ctitle p{color:#7c8984;font-size:9.5px}
+.meta{color:#87938f;font-size:9px}
+#standings table{min-width:540px}
+#standings th{
+  background:#f2eee5;color:#697a74;border-bottom-color:#e4dccb;
+  letter-spacing:.08em;font-size:8.5px
+}
+#standings td{border-bottom-color:#eee7d9}
+#standings tbody tr:hover{background:#faf6ed}
+#standings tbody tr.lead{
+  background:linear-gradient(90deg,#f6ebc7 0%,#fffdf8 100%)
+}
+#standings .rank{
+  border-radius:8px;background:#eee9df;color:#5e746c
+}
+#standings tr.lead .rank{
+  background:#173c34;color:#efd486;box-shadow:none
+}
+#standings .avatar,.avatar,.lav{
+  background:#173c34;color:#f3df9e
+}
+#standings .tname{color:#243f38}
+#standings .tcode{color:#929c98}
+#standings .setpts{
+  background:#efe4ba;color:#173c34;border-radius:7px
+}
+#standings .played,#standings .record{color:#435f57}
+#standings .diff{color:#788a84}
+#standings .diff.positive{color:#2d725f}
+#standings .diff.negative{color:#a15b55}
+.status{color:#8a9691;background:#fbf8f1}
+.rulesbox{
+  margin:9px 12px 9px;background:#f8f3e7;
+  border-color:#e5dcc7;border-radius:9px
+}
+.rulesbox summary{color:#36554c}
+.rulesicon{background:#173c34;color:#ecd181}
+.rulestitle{color:#2c4b43}
+.ruleshint{color:#8b948f}
+.rulesbody{border-top-color:#e8deca}
+.rulescores div{
+  background:#fffdf8;border-color:#e7dfcf;border-radius:7px
+}
+.rulescores b{color:#49635c}
+.rulescores span{color:#8d6a1e}
+.rulesbody p{color:#75837e}
+.box,.result,.rv,.semibox,.archivecard,.contact-card{
+  background:#fffdf8;border-color:#e6dfcf;box-shadow:none
+}
+.done{background:#edf1e9;color:#315f50}
+.bigscore,.rb{
+  background:#173c34;color:#f4d98a;border-radius:7px
+}
+.set,.chip{background:#f1ede5;color:#647a72}
+.leader{background:#fffdf8}
+.lav{
+  border-color:#dfc66f;box-shadow:0 0 0 4px #f7eed3
+}
+.lname{color:#244039}
+.lrec{color:#7d8c86}
+.lp{
+  background:#efe3b9;color:#173c34;border:1px solid #ddc87f
+}
+.rvbig{color:#173c34}
+.semibox{
+  background:#faf7ef;border-radius:8px
+}
+.semibox>span{color:#9a7421}
+.semibox b{color:#2a4840}
+.semibox em{color:#999f9c}
+.results,.review,.history{background:#fffdf8}
+.archivecard{border-radius:9px}
+.archivehead{border-bottom-color:#e7dfd0;background:#fffdf8}
+.archivebadge{
+  background:#173c34;color:#e8d18a;border-radius:6px
+}
+.archiveleader{background:#f6f1e6;color:#6d7e77}
+.archiveleader b{color:#173c34}
+.archivematches{border-top-color:#e6dfcf}
+.archivematches summary{color:#35564d}
+.archivematch{background:#fffdf8;border-color:#e7dfcf}
+.archivematch b{color:#2b4941}
+.notice{
+  background:#f6ebc7;border-color:#e0ca83;color:#6c531a
+}
+input,select{
+  background:#fffdf8;border-color:#dcd5c7;color:#29463e;border-radius:7px
+}
+input:focus,select:focus{
+  outline:2px solid #e6d18f;outline-offset:1px;border-color:#b99c4c
+}
+.act{
+  background:#173c34;color:#f9f5e9;border-radius:7px
+}
+.act.sec{background:#eee8db;color:#29473f}
+.act.warn{background:#f7efd6;color:#85631b;border-color:#dfcf9e}
+.footer{
+  color:#74847e;padding-top:5px
+}
+.fleft{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:9px;font-style:normal;font-weight:850;letter-spacing:.12em;text-transform:uppercase
+}
+.fright{color:#899590}
+.credit-agd{color:#7c6528}
+.contact-badge{background:#173c34;color:#efd486}
+.contact-link{background:#fffdf8;border-color:#e6dfcf;color:#2d4a42}
+.contact-link:hover{border-color:#cdb56c;background:#faf5e8}
+.contact-link svg{color:#8e6e24}
+@media(max-width:740px){
+  .hero-in{padding:15px 14px;min-height:82px}
+  .logo{width:42px;height:42px;font-size:22px}
+  .edition{font-size:7.5px}
+  .brand h1{font-size:21px}
+  .brand p{font-size:9px}
+  .tabs{width:100%;overflow:auto}
+  .tab{padding:7px 9px}
+  .stats{gap:7px}
+  .stat{min-height:68px}
+}
 </style></head>
 <body>
-<header class="hero"><div class="hero-in"><div class="brand"><div class="logo">🏸</div><div><h1>Family Friendly Tournament</h1><p>Tournament 2.0 · Family badminton standings and results.</p></div></div><div class="tagline">GOOD RALLIES<br>STRONGER FAMILIES</div></div></header>
-<main class="page"><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="bar-chart-3"></i>Standings</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Match Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Tournament Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav>
-<section class="stats"><div class="stat"><div class="sico"><i data-lucide="users"></i></div><div><div class="sl">Teams / Players</div><div class="sv" id="teamCount">0</div><div class="sn">Teams in the league</div></div></div><div class="stat"><div class="sico"><i data-lucide="activity"></i></div><div><div class="sl">Matches Played</div><div class="sv" id="matchCount">0</div><div class="sn">Total matches so far</div></div></div><div class="stat"><div class="sico gold"><i data-lucide="trophy"></i></div><div><div class="sl">Current Leader</div><div class="sv" id="leaderTop">—</div><div class="sn" id="leaderNote">No matches played yet</div></div></div></section>
+<header class="hero"><div class="hero-in"><div class="brand"><div class="logo">🏸</div><div><div class="edition">Family Friendly · Tournament 02</div><h1>Badminton Tournament</h1><p>Family competition · live standings · match results</p></div></div><div class="tagline"><span>Edition 02</span>GOOD RALLIES<br>STRONGER FAMILIES</div></div></header>
+<main class="page"><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Tournament Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav>
+<section class="stats"><div class="stat"><div class="sico"><i data-lucide="users"></i></div><div><div class="sl">Tournament Teams</div><div class="sv" id="teamCount">0</div><div class="sn">Same five pairs · fresh season</div></div></div><div class="stat"><div class="sico"><i data-lucide="activity"></i></div><div><div class="sl">Matches Played</div><div class="sv" id="matchCount">0</div><div class="sn">Tournament 2.0 progress</div></div></div><div class="stat"><div class="sico gold"><i data-lucide="trophy"></i></div><div><div class="sl">Current Leader</div><div class="sv" id="leaderTop">—</div><div class="sn" id="leaderNote">No matches played yet</div></div></div></section>
 <section id="standings" class="panel active"><div class="dash"><article class="card"><div class="chead"><div class="ctitle"><i data-lucide="chart-no-axes-column-increasing"></i><div><h2>Group Standings</h2><p>Live ranking by win percentage while group matches are in progress.</p></div></div><div class="meta" id="updated">Waiting for results</div></div><details class="rulesbox"><summary><span class="rulesicon">i</span><span class="rulestitle">Tournament 2.0 rules</span><span class="ruleshint">Format &amp; standings</span></summary><div class="rulesbody"><div class="rulescores"><div><b>Match</b><span>Best of 3</span></div><div><b>Each set</b><span>To 15</span></div><div><b>Win by</b><span>2</span></div><div><b>Score cap</b><span>21</span></div></div><p><b>Standings:</b> A 2–0 and 2–1 both count as one match win. The live table uses Win %. For a two-team tie, Head-to-Head comes first. For 3+ tied teams, a mini-table using only matches between those teams is used, followed by rally Point Difference and Total Points Scored.</p><p><b>Knockout:</b> Top 4 qualify. Semifinals are 1st vs 3rd and 2nd vs 4th. No automatic forfeits due to availability.</p></div></details><div class="scroll"><table><thead><tr><th class="rankh">#</th><th>Team</th><th>P</th><th>W–L</th><th>Win %</th><th>PD</th></tr></thead><tbody id="standingsBody"></tbody></table></div><div class="status" id="status">Loading shared standings…</div></article><aside class="side"><article class="card"><div class="chead"><div class="ctitle"><i data-lucide="activity"></i><div><h2>Latest Match Result</h2><p>Most recent match with detailed scores.</p></div></div></div><div class="latest" id="latestCard"><div class="empty">No match results yet.</div></div></article><article class="card"><div class="chead"><div class="ctitle"><i data-lucide="trophy"></i><div><h2>Tournament Leader</h2><p id="leaderSub">Waiting for the first result.</p></div></div></div><div class="leader" id="leaderCard"><div class="empty" style="grid-column:1/-1">No leader yet.</div></div></article></aside></div></section>
 <section id="results" class="panel"><article class="card"><div class="chead"><div class="ctitle"><i data-lucide="file-text"></i><div><h2>Match Results</h2><p>All completed matches with individual set scores.</p></div></div><div class="meta" id="resultCount">0 results</div></div><div class="results" id="resultsGrid"></div></article></section>
 <section id="review" class="panel"><article class="card"><div class="chead"><div class="ctitle"><i data-lucide="trophy"></i><div><h2>Tournament Review</h2><p>Group progress and the current knockout picture.</p></div></div></div><div class="review"><div class="rv"><h3>Current Leader</h3><div class="rvbig" id="reviewLeader">—</div><div class="rvnote" id="reviewLeaderStats">No group matches yet.</div></div><div class="rv"><h3>Latest Result</h3><div class="rvbig" id="latestResult" style="font-size:20px">—</div><div class="rvnote" id="latestSets"></div></div><div class="rv rvwide"><h3 id="semiTitle">Projected Semifinals</h3><div class="semigrid" id="semiPreview"><div class="semibox">Awaiting group standings.</div></div><div class="rvnote">Top 4 qualify · 1st vs 3rd · 2nd vs 4th</div></div></div></article></section>
