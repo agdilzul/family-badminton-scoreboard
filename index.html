@@ -1952,6 +1952,78 @@ body::before{
     opacity:.72;
   }
 }
+
+/* refined-banner-background */
+.event-hero::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:460px;
+  height:280px;
+  right:8px;
+  top:-48px;
+  background:radial-gradient(ellipse at 72% 50%,rgba(225,239,111,.11) 0%,rgba(225,239,111,.045) 34%,transparent 68%);
+  opacity:1;
+  transform:none;
+  pointer-events:none;
+  -webkit-mask:none;
+  mask:none;
+}
+.event-hero::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:250px;
+  height:250px;
+  right:-18px;
+  top:-38px;
+  border-radius:50%;
+  border:1px solid rgba(230,239,112,.16);
+  box-shadow:
+    0 0 0 32px rgba(230,239,112,.05),
+    0 0 0 67px rgba(255,255,255,.025);
+  pointer-events:none;
+}
+:root[data-theme="dark"] .event-hero::before{
+  background:radial-gradient(ellipse at 72% 50%,rgba(223,240,110,.105) 0%,rgba(94,152,111,.045) 38%,transparent 70%);
+  opacity:1;
+}
+:root[data-theme="dark"] .event-hero::after{
+  border-color:rgba(223,240,110,.15);
+  box-shadow:
+    0 0 0 32px rgba(223,240,110,.045),
+    0 0 0 67px rgba(199,222,208,.022);
+}
+@media(max-width:900px){
+  .event-hero::before{
+    width:380px;
+    height:250px;
+    right:-18px;
+    top:-36px;
+  }
+  .event-hero::after{
+    width:225px;
+    height:225px;
+    right:-25px;
+    top:-28px;
+  }
+}
+@media(max-width:600px){
+  .event-hero::before{
+    width:280px;
+    height:210px;
+    right:-70px;
+    top:-26px;
+    opacity:.8;
+  }
+  .event-hero::after{
+    width:195px;
+    height:195px;
+    right:-75px;
+    top:-14px;
+    opacity:.72;
+  }
+}
 </style></head>
 <body>
 <header class="topbar"><div class="topbar-in"><div class="topbrand"><div class="topbrand-mark">02</div><div><strong>Family Friendly Badminton</strong><small>Tournament 02</small></div></div><nav class="tabs"><button class="tab active" data-tab="standings"><i data-lucide="layout-dashboard"></i>Overview</button><button class="tab" data-tab="results"><i data-lucide="file-text"></i>Results</button><button class="tab" data-tab="review"><i data-lucide="trophy"></i>Review</button><button class="tab" data-tab="history"><i data-lucide="archive"></i>History</button><button class="tab" data-tab="admin"><i data-lucide="users"></i>Organizer</button></nav><button id="themeToggle" class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch to dark mode" title="Dark mode"><i data-lucide="moon"></i><span>Dark</span></button></div></header>
